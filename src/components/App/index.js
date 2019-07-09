@@ -40,4 +40,4 @@ const App = () => {
 
 }
     
-export default withFirebase(App);
+export default withAuthentication(App);
