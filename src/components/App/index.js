@@ -16,6 +16,7 @@ import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
 
 import {withFirebase} from '../Firebase';
+import {AuthUserContext} from '../Session';
 
 class App extends React.Component {
     constructor(props){
@@ -39,20 +40,22 @@ class App extends React.Component {
 
     render(){
         return(
-            <Router>
-                <div>
-                    <Navigation authUser = {this.state.authUser}/>
-                    <hr />
-                    <Route exact path= {ROUTES.LANDING} component = {LandingPage} />
-                    <Route path= {ROUTES.SIGN_UP} component = {SignUpPage} />
-                    <Route path= {ROUTES.SIGN_IN} component = {SignInPage} />
-                    <Route path= {ROUTES.PASSWORD_FORGET} component = {PasswordForgetPage} />
-                    <Route path= {ROUTES.HOME} component = {HomePage} />
-                    <Route path= {ROUTES.ACCOUNT} component = {AccountPage} />
-                    <Route path= {ROUTES.ADMIN} component = {AdminPage} />
-    
-                </div>
-            </Router>
+            <AuthUserContext.Provider value = {this.state.authUser}>
+                <Router>
+                    <div>
+                        <Navigation/>
+                        <hr />
+                        <Route exact path= {ROUTES.LANDING} component = {LandingPage} />
+                        <Route path= {ROUTES.SIGN_UP} component = {SignUpPage} />
+                        <Route path= {ROUTES.SIGN_IN} component = {SignInPage} />
+                        <Route path= {ROUTES.PASSWORD_FORGET} component = {PasswordForgetPage} />
+                        <Route path= {ROUTES.HOME} component = {HomePage} />
+                        <Route path= {ROUTES.ACCOUNT} component = {AccountPage} />
+                        <Route path= {ROUTES.ADMIN} component = {AdminPage} />
+        
+                    </div>
+                </Router>
+            </AuthUserContext.Provider>
         )
     }
 
